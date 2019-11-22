@@ -1,0 +1,35 @@
+Configure project in Visual Studio
+----------------------------------
+1) download mpi from:
+   https://www.mpich.org/static/downloads/1.4.1p1/
+   choose:
+   mpich2-1.4.1p1-win-x85-64.msi
+   install, by running commands given at:
+   http://swash.sourceforge.net/online_doc/swashimp/node9.html
+   C:\>smpd -install
+   C:\>mpiexec -remove
+   C:\>mpiexec -register
+   C:\>mpiexec -validate (it should return SUCCESS)
+   C:\>smpd -status (it should return 'smpd running on <hostname>')
+   create a path to run mpiexec:
+   path=:\Program Files\MPICH2\bin
+2) Create a console application project
+3) Project -> Properties -> Linker -> Advanced -> Target Machine:
+   MachineX64
+   Build -> Configuration Manager...
+   Configuration: Release
+   Platform     : X64
+4) Project -> Properties -> C/C++ -> General => Additional Library Directories:
+   C:\Program Files\MPICH2\include
+   Project -> Properties -> Linker -> General => Additional Library Directories:
+   C:\Program Files\MPICH2\lib
+   Project -> Properties -> Linker -> Input -> Additional Dependencies:
+   mpi.lib
+5) Start dos-box, give command
+   cd C:\Users\Klasing\MyProgramming\MyCpp\Projects\Test\Boost_Mpi\x64\Release
+   give command
+   mpiexec -n 2 test_mpi_without_boost
+   output from app.
+   Hello world from processor Lappie, rank 0 out of 2 processors
+   Hello world from processor Lappie, rank 1 out of 2 processors
+================================================================================
